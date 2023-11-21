@@ -4,6 +4,7 @@ import com.github.satellite.event.Event;
 import com.github.satellite.features.module.render.ClickGUI;
 import com.github.satellite.setting.KeyBindSetting;
 import com.github.satellite.setting.Setting;
+import com.github.satellite.utils.Translate;
 import net.minecraft.client.Minecraft;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Module {
+
+	private final Translate translate = new Translate(0.0F, 0.0F);
 
 	protected Minecraft mc = Minecraft.getMinecraft();
 	
@@ -52,6 +55,10 @@ public class Module {
 		this(name, keyCode, category);
 		this.priority = priority;
 	}
+	public Translate getTranslate() {
+		return translate;
+	}
+
 
 	public void addSetting(Setting... settings) {
 		this.settings.addAll(Arrays.asList(settings));

@@ -1,6 +1,7 @@
 package com.github.satellite.mixin.client;
 
 import com.github.satellite.Satellite;
+import com.github.satellite.event.listeners.EventRender2D;
 import com.github.satellite.features.module.ModuleManager;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
@@ -16,5 +17,12 @@ public class MixinGuiIngame {
     private void renderHotbar(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
         if(ModuleManager.getModulebyName("HUD").enable)
         Satellite.hud.draw();
+        if(ModuleManager.getModulebyName("HUD2").enable)
+            Satellite.hud2.drawHUD2();
+    }
+    @Inject(method =  "renderGameOverlay", at = @At("RETURN"))
+    public void renderGameOverlay(float partialTicks, CallbackInfo ci) {
+        final EventRender2D eventRender2D = new EventRender2D( partialTicks);
+        Satellite.onEvent(eventRender2D);
     }
 }

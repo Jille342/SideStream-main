@@ -76,6 +76,7 @@ public class ModuleManager {
 		modules.add(new Sprint());
 		modules.add(new AimAssist());
 		modules.add(new BetterFightSound());
+		modules.add(new HUD2());
 	}
 
 	public static class ModuleComparator implements Comparator<Module> {
