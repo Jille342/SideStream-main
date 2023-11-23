@@ -1,6 +1,7 @@
 package com.github.satellite.features.module.render;
 
 import com.github.satellite.event.Event;
+import com.github.satellite.event.listeners.EventRender2D;
 import com.github.satellite.event.listeners.EventRenderWorld;
 import com.github.satellite.features.module.Module;
 import com.github.satellite.utils.render.RenderUtils;

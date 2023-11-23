@@ -3,8 +3,10 @@ package com.github.satellite.features.module.misc;
 import com.github.satellite.event.Event;
 import com.github.satellite.event.listeners.EventPacket;
 import com.github.satellite.features.module.Module;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketSoundEffect;
+import net.minecraft.util.SoundEvent;
 import org.lwjgl.input.Keyboard;
 
 public class BetterFightSound extends Module {
@@ -21,7 +23,13 @@ public class BetterFightSound extends Module {
                 Packet<?> p = event.getPacket();
 
                 if(p instanceof SPacketSoundEffect) {
+                  if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP)
                     event.setCancelled(true);
+                    if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_WEAK)
+                        event.setCancelled(true);
+                    if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_STRONG)
+                        event.setCancelled(true);
+
                 }
                 //      if(p instanceof SPacketExplosion) {
                 //        event.setCancelled(true);
