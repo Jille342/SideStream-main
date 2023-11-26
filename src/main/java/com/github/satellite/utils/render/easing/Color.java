@@ -50,7 +50,8 @@ public class Color extends EaseValue {
 		this(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(), easeMode);
 	}
 
-	@Override
+
+    @Override
 	public void updateEase() {
 		float time = this.timer.getCurrentMS() - this.timer.getLastMS();
 		this.red = lastRed + AnimationUtil.easing(easeMode, time / duration, easeToRed - lastRed);

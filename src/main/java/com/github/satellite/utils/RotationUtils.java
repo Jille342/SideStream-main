@@ -138,6 +138,16 @@ public final class RotationUtils {
         float f3 = MathHelper.sin(-rotation.getPitch() * (float) DEG_TO_RAD);
         return new Vec3d((double) (f1 * f2), (double) f3, (double) (f * f2));
     }
+    public static float[] getRotationFromPosition(double x, double z, double y) {
+        double xDiff = x - Minecraft.getMinecraft().player.posX;
+        double zDiff = z - Minecraft.getMinecraft().player.posZ;
+        double yDiff = y - Minecraft.getMinecraft().player.posY - 1.2;
+
+        double dist = MathHelper.sqrt(xDiff * xDiff + zDiff * zDiff);
+        float yaw = (float) (Math.atan2(zDiff, xDiff) * 180.0D / 3.141592653589793D) - 90.0F;
+        float pitch = (float) -(Math.atan2(yDiff, dist) * 180.0D / 3.141592653589793D);
+        return new float[]{yaw, pitch};
+    }
     
     public static Optional<Rotation> reachableOffset(Entity entity, BlockPos pos, Vec3d offsetPos, double blockReachDistance, boolean wouldSneak) {
         /*Vec3d eyes = wouldSneak ? RayTraceUtils.inferSneakingEyePosition(entity) : entity.getPositionEyes(1.0F);

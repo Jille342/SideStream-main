@@ -5,8 +5,8 @@ import com.github.satellite.event.listeners.EventChat;
 import com.github.satellite.event.Event;
 import com.github.satellite.event.listeners.EventPacket;
 import com.github.satellite.features.module.ModuleManager;
-import com.github.satellite.features.module.render.HUD2;
 import com.github.satellite.ui.HUD;
+import com.github.satellite.ui.HUD2;
 import com.github.satellite.ui.gui.clickGUI.GuiClickGUI;
 import com.github.satellite.ui.theme.ThemeManager;
 import com.github.satellite.utils.WorldUtils;
@@ -26,7 +26,7 @@ import org.lwjgl.input.Keyboard;
 public class Satellite
 {
     public static final String MOD_ID = "satellite";
-    public static final String NAME = "Vertex";
+    public static final String NAME = "SideStream";
     public static final String VERSION = "0.1 Beta";
 	public static HUD2 hud2 = new HUD2();
 

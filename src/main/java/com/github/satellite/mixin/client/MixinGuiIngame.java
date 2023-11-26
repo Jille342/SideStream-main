@@ -18,7 +18,7 @@ public class MixinGuiIngame {
         if(ModuleManager.getModulebyName("HUD").enable)
         Satellite.hud.draw();
         if(ModuleManager.getModulebyName("HUD2").enable)
-            Satellite.hud2.drawHUD2();
+            Satellite.hud2.draw();
     }
     @Inject(method =  "renderGameOverlay", at = @At("RETURN"))
     public void renderGameOverlay(float partialTicks, CallbackInfo ci) {

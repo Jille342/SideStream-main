@@ -23,6 +23,7 @@
     "MixinMinecraft",
     "MixinMovementInputFromOptions",
     "MixinNetHandlerPlayClient",
-    "MixinNetworkManager"
+    "MixinNetworkManager",
+    "MixinRenderLivingBase"
   ]
 }
