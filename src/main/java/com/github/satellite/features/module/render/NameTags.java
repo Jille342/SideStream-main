@@ -172,8 +172,6 @@ public class NameTags extends Module {
 
         if (!mainHandItem.isEmpty()) {
 
-            int enchantSize = EnchantmentHelper.getEnchantments(mainHandItem).size();
-
 
 
             int armorY = findArmorY(posY);

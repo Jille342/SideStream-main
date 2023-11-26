@@ -61,7 +61,7 @@ public class HUD2 {
                 font.drawStringWithShadow(coord, font.getStringWidth(fps) + 6, scaledResolution.getScaledHeight() - height, -1);
                 font.drawStringWithShadow(ping, 3, scaledResolution.getScaledHeight() - height - font.getHeight() - 2, -1);
             }
-            font.drawStringWithShadow(build, 5, 12, -1);
+            font.drawStringWithShadow(build, 5, 16, -1);
 
             this.drawGaeHud();
         }
