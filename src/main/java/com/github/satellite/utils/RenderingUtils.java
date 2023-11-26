@@ -1,5 +1,10 @@
 package com.github.satellite.utils;
 
+import com.github.satellite.features.module.Module;
+import com.github.satellite.features.module.ModuleManager;
+import com.github.satellite.features.module.render.NameTags;
+import com.github.satellite.utils.font.CFontRenderer;
+import com.github.satellite.utils.font.Fonts;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -12,7 +17,10 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL32;
+import scala.Int;
 
 import java.awt.*;
 
@@ -38,6 +46,79 @@ public class RenderingUtils implements MCUtil {
         for (int i = 0; i < segments; i++)
             drawRect(x + segmentLength * i, y, x + (segmentLength + 1) * i, y1, Colors.rainbow(time, i, alpha).getRGB());
     }
+    public static void drawNametag(Entity entity, String[] text, int color, int type) {
+        Vec3d pos = EntityUtils.getInterpolatedPos(entity, mc.getRenderPartialTicks());
+        drawNametag(pos.x, pos.y + entity.height, pos.z, text, color, type);
+    }
+
+    public static void drawNametag(double x, double y, double z, String[] text, int color, int type) {
+         final CFontRenderer font = Fonts.default18;
+        double dist = mc.player.getDistance(x, y, z);
+        double scale = 1, offset = 0;
+        int start = 0;
+        switch (type) {
+            case 0:
+                scale = dist / 20 * Math.pow(1.2589254, 0.1 / (dist < 25 ? 0.5 : 2));
+                scale = Math.min(Math.max(scale, .5), 5);
+                offset = scale > 2 ? scale / 2 : scale;
+                scale /= 40;
+                start = 10;
+                break;
+            case 1:
+                scale = -((int) dist) / 6.0;
+                if (scale < 1) scale = 1;
+                scale *= 2.0 / 75.0;
+                break;
+            case 2:
+                scale = 0.0018 + 0.003 * dist;
+                if (dist <= 8.0) scale = 0.0245;
+                start = -8;
+                break;
+        }
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x - mc.getRenderManager().viewerPosX, y + offset - mc.getRenderManager().viewerPosY, z - mc.getRenderManager().viewerPosZ);
+        GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0, 1, 0);
+        GlStateManager.rotate(mc.getRenderManager().playerViewX, mc.gameSettings.thirdPersonView == 2 ? -1 : 1, 0, 0);
+        GlStateManager.scale(-scale, -scale, scale);
+        if (type == 2) {
+            double width = 0;
+            int bcolor = new Color(0, 0, 0, 51).getRGB();
+            Module nametags = ModuleManager.getModulebyClass(NameTags.class);
+
+
+            for (int i = 0; i < text.length; i++) {
+                double w = font.getStringWidth( text[i]) / 2;
+                if (w > width) {
+                    width = w;
+                }
+            }
+            drawBorderedRect(-width - 1, -mc.fontRenderer.FONT_HEIGHT, width + 2, 1, 1.8f, new Color(0, 4, 0, 85).getRGB(), bcolor);
+        }
+        GlStateManager.enableTexture2D();
+        for (int i = 0; i < text.length; i++) {
+            font.drawStringWithShadow( text[i], -font.getStringWidth( text[i]) / 2, i * (mc.fontRenderer.FONT_HEIGHT + 1) + start, color);
+        }
+        GlStateManager.disableTexture2D();
+        if (type != 2) {
+            GlStateManager.popMatrix();
+        }
+    }
+
+    public static void prepare() {
+        glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ZERO, GL11.GL_ONE);
+        GlStateManager.shadeModel(GL11.GL_SMOOTH);
+        GlStateManager.depthMask(false);
+        GlStateManager.enableBlend();
+        GlStateManager.disableDepth();
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableLighting();
+        GlStateManager.disableCull();
+        GlStateManager.enableAlpha();
+        glEnable(GL11.GL_LINE_SMOOTH);
+        glEnable(GL32.GL_DEPTH_CLAMP);
+    }
+
 
     public static void drawCustomString(String text, float x, float y, int color, boolean shadow, float scale) {
         GlStateManager.pushMatrix();

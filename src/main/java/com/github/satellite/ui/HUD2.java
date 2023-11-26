@@ -17,8 +17,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;
@@ -49,7 +47,8 @@ public class HUD2 {
         String name = Satellite.NAME;
         String fps = "FPS: \2477" + mc.getDebugFPS();
         String ping = "PING: \2477" + ((mc.getCurrentServerData() != null) ? mc.getCurrentServerData().pingToServer : 0);
-        String coord = "XYZ: \2477" + MathHelper.floor(this.mc.player.posX) + " / " + MathHelper.floor(this.mc.player.posY) + " / " + MathHelper.floor(this.mc.player.posZ);String build = "Build: \2477" + Satellite.VERSION;
+        String coord = "XYZ: \2477" + MathHelper.floor(this.mc.player.posX) + " / " + MathHelper.floor(this.mc.player.posY) + " / " + MathHelper.floor(this.mc.player.posZ);String
+                build = "Build: \2477" + Satellite.VERSION;
         name = name.substring(0, 1).replaceAll(name.substring(0, 1), "\247c" + name.substring(0, 1)) + name.substring(1).replaceAll(name.substring(1), "\247f" + name.substring(1));
 
         if (!mc.gameSettings.showDebugInfo) {
@@ -62,6 +61,7 @@ public class HUD2 {
                 font.drawStringWithShadow(coord, font.getStringWidth(fps) + 6, scaledResolution.getScaledHeight() - height, -1);
                 font.drawStringWithShadow(ping, 3, scaledResolution.getScaledHeight() - height - font.getHeight() - 2, -1);
             }
+            font.drawStringWithShadow(build, 5, 12, -1);
 
             this.drawGaeHud();
         }
