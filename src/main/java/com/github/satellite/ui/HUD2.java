@@ -50,7 +50,6 @@ public class HUD2 {
         String coord = "XYZ: \2477" + MathHelper.floor(this.mc.player.posX) + " / " + MathHelper.floor(this.mc.player.posY) + " / " + MathHelper.floor(this.mc.player.posZ);String
                 build = "Build: \2477" + Satellite.VERSION;
         name = name.substring(0, 1).replaceAll(name.substring(0, 1), "\247c" + name.substring(0, 1)) + name.substring(1).replaceAll(name.substring(1), "\247f" + name.substring(1));
-
         if (!mc.gameSettings.showDebugInfo) {
             font2.drawStringWithShadow(name, 3, 4, new Color(255, 50, 50).getRGB());
             if (mc.currentScreen instanceof GuiChat) {
@@ -114,7 +113,7 @@ public class HUD2 {
                 if (sortedList.size() > nextIndex)
                     nextModule = getNextEnabledModule(sortedList, nextIndex);
                 if ((Boolean) background.enable)
-                    RenderingUtils.drawRect(translateX - 2.0D, translateY - 1.0D, width, translateY + listOffset - 1.0D, Colors.getColor(20, 255));
+                    RenderingUtils.drawRect(translateX - 2.0D, translateY - 1.0D, width, translateY + listOffset - 1.0D, 0x90000000);
                 if ((Boolean) OUTLINE.enable) {
                     RenderingUtils.drawRect(translateX - 2.6D, translateY - 1.0D, translateX - 2.0D, translateY + listOffset - 1.0D, color);
                     double offsetY = listOffset;

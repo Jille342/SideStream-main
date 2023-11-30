@@ -95,14 +95,16 @@ public class NameTags extends Module {
         RenderingUtils.drawNametag(posX, adjustedY, posZ, name, findTextColor(entityPlayer), 2);
         renderItemsAndArmor(entityPlayer, 0, 0);
         GlStateManager.popMatrix();
+
     }
 
     private String buildEntityNameString(EntityPlayer entityPlayer) {
-        String name = entityPlayer.getName();
 
 
 
 
+        String name = entityPlayer.getDisplayName().getFormattedText();
+        name = name.replace(entityPlayer.getDisplayName().getFormattedText(), "\247f" + entityPlayer.getDisplayName().getFormattedText());
 
 
 

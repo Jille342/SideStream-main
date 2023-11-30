@@ -100,6 +100,10 @@ public class Module {
 		return name;
 	}
 
+	public void setTag(String string) {
+		setDisplayName(name + " "+ "\u00A77" + string);
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}

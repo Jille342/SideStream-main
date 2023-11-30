@@ -46,7 +46,8 @@ public class AutoBuild extends Module {
     @Override
     public void onEvent(Event<?> e) {
         if(e instanceof EventUpdate) {
-            setDisplayName("AutoBuild \u00A77" + ((ModeSetting)settings.get(1)).getMode());
+            //   setDisplayName("AutoBuild \u00A77" + ((ModeSetting)settings.get(1)).getMode());
+            setTag(mode.getMode());
             switch(mode.getMode()) {
 
                 case "Portal":

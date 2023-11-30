@@ -32,7 +32,6 @@ public class ModuleManager {
 		modules.add(new Step());
 		modules.add(new Yaw());
 		modules.add(new Fullbright());
-		modules.add(new Velocity());
 		modules.add(new InvMove());
 		modules.add(new Tracers());
 		modules.add(new NoFall());
@@ -41,7 +40,6 @@ public class ModuleManager {
 		modules.add(new StorageESP());
 		modules.add(new AutoSlime());
 		modules.add(new AutoBuild());
-		modules.add(new Surround());
 		modules.add(new PacketCanceller());
 		modules.add(new Map());
 		modules.add(new EntityFly());
@@ -49,22 +47,15 @@ public class ModuleManager {
 		modules.add(new HoleKicker());
 		modules.add(new ESP());
 		modules.add(new AntiChunkBan());
-		modules.add(new AntiCrystal());
 		modules.add(new Debug());
 		modules.add(new Ground());
 		modules.add(new Test());
 		modules.add(new ElytraFly());
         modules.add(new HUD());
 		modules.add(new FreeLook());
-		modules.add(new CevBreaker());
 		modules.add(new Notification());
 		modules.add(new HoleTP());
-		modules.add(new PistonAura());
-		modules.add(new PistonAura2());
-		modules.add(new PistonAura3());
 		modules.add(new ChatSuffix());
-		modules.add(new Vclip());
-		modules.add(new CrystalAura());
 		modules.add(new HoleESP());
 		modules.add(new AutoTotem());
 		modules.add(new FakePlayer());;
@@ -79,6 +70,7 @@ public class ModuleManager {
 		modules.add(new HUD2());
 		modules.add(new BowAimbot());
 		modules.add(new NameTags());
+		modules.add(new NameProtect());
 	}
 
 	public static class ModuleComparator implements Comparator<Module> {

@@ -7,6 +7,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import org.lwjgl.input.Keyboard;
 
 public class BetterFightSound extends Module {
@@ -28,6 +29,8 @@ public class BetterFightSound extends Module {
                     if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_WEAK)
                         event.setCancelled(true);
                     if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_STRONG)
+                        event.setCancelled(true);
+                    if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE)
                         event.setCancelled(true);
 
                 }

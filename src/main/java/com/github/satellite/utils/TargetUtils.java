@@ -12,7 +12,6 @@ import java.util.Comparator;
 import javax.annotation.Nullable;
 
 import com.github.satellite.Satellite;
-import com.github.satellite.features.module.combat.PistonAura3.PA;
 
 public class TargetUtils {
 
