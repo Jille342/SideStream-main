@@ -140,7 +140,6 @@ public class Colors implements MCUtil {
 
     public static int getTeamColor(Entity entityIn) {
         int i = -1;
-        if (Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase().contains("shotbow")) {
             if (entityIn.getDisplayName().getUnformattedText().equalsIgnoreCase("§f[§cR§f]§c" + entityIn.getName())) {
                 i = Colors.getColor(new Color(255, 60, 60));
             } else if (entityIn.getDisplayName().getUnformattedText().equalsIgnoreCase("§f[§9B§f]§9" + entityIn.getName())) {
@@ -152,7 +151,7 @@ public class Colors implements MCUtil {
             } else {
                 i = Colors.getColor(new Color(255, 255, 255));
             }
-        }
+
         return i;
     }
 

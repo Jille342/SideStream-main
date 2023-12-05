@@ -148,6 +148,8 @@ public final class BowAimbot extends Module
                 if (entity.isDead || !entity.isEntityAlive() || entity.ticksExisted < 10) {
                     continue;
                 }
+                if (!mc.player.canEntityBeSeen(entity))
+                    continue;
 
                 if (!PlayerHelper.fov(entity, fov.value))
                     continue;

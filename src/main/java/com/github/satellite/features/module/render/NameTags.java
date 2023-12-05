@@ -1,6 +1,7 @@
 package com.github.satellite.features.module.render;
 
 import com.github.satellite.event.Event;
+import com.github.satellite.event.listeners.EventRender2D;
 import com.github.satellite.event.listeners.EventRenderWorld;
 import com.github.satellite.event.listeners.EventUpdate;
 import com.github.satellite.features.module.Module;
@@ -32,7 +33,6 @@ import java.awt.*;
 public class NameTags extends Module {
 
     private final CFontRenderer font = Fonts.default18;
-    Timer timer = new Timer(2.0F);
     BooleanSetting showItems;
     BooleanSetting showDurability;
     BooleanSetting renderSelf;
@@ -83,7 +83,7 @@ public class NameTags extends Module {
     }
 
     private double balancePosition(double newPosition, double oldPosition) {
-        return oldPosition + (newPosition - oldPosition) * this.timer.renderPartialTicks;
+        return oldPosition + (newPosition - oldPosition) * mc.getRenderPartialTicks();
     }
 
     private void renderNameTags(EntityPlayer entityPlayer, double posX, double posY, double posZ) {
@@ -91,10 +91,16 @@ public class NameTags extends Module {
 
         String[] name = new String[1];
         name[0] = buildEntityNameString(entityPlayer);
-
+       RenderingUtils.prepare();
         RenderingUtils.drawNametag(posX, adjustedY, posZ, name, findTextColor(entityPlayer), 2);
         renderItemsAndArmor(entityPlayer, 0, 0);
         GlStateManager.popMatrix();
+        mc.entityRenderer.disableLightmap();
+        GlStateManager.disableLighting();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableCull();
+
+
 
     }
 
@@ -279,6 +285,9 @@ public class NameTags extends Module {
         GlStateManager.pushMatrix();
         GlStateManager.scale(.5, .5, .5);
         renderEnchants(itemStack, posX, posY - 24);
+        GlStateManager.disableLighting();
+        GlStateManager.disableBlend();
+        GlStateManager.disableCull();
         GlStateManager.popMatrix();
     }
 

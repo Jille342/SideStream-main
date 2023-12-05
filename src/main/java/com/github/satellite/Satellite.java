@@ -25,7 +25,7 @@ import org.lwjgl.input.Keyboard;
 @Mod(modid = Satellite.MOD_ID, name = Satellite.NAME, version = Satellite.VERSION)
 public class Satellite
 {
-    public static final String MOD_ID = "satellite";
+    public static final String MOD_ID = "sidestream";
     public static final String NAME = "SideStream";
     public static final String VERSION = "0.1 Beta";
 	public static HUD2 hud2 = new HUD2();

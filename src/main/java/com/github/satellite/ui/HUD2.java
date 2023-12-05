@@ -42,6 +42,22 @@ public class HUD2 {
     }
 
     public void draw() {
+        int[] counter = {1};
+        int color = -1;
+        switch (namecolormode.getMode()) {
+            case "Default":
+                color = new Color(50, 50, 255).getRGB();
+                break;
+            case "Rainbow":
+                color = Colors.rainbow((counter[0] * 15) * 7, 0.8f, 1.0f);
+                break;
+            case "Pulsing":
+                color = TwoColoreffect(new Color(50, 50, 255), new Color(9, 9, 79), Math.abs(System.currentTimeMillis() / 10L) / 100.0 + 3.0F * (counter[0] * 2.55) / 60).getRGB();
+                break;
+            case "Test":
+                color = TwoColoreffect(new Color(65, 179, 255), new Color(248, 54, 255), Math.abs(System.currentTimeMillis() / 10L) / 100.0 + 3.0F * (counter[0] * 2.55) / 60).getRGB();
+                break;
+        }
         ScaledResolution scaledResolution = new ScaledResolution(mc);
         float height = 10;
         String name = Satellite.NAME;
@@ -49,9 +65,11 @@ public class HUD2 {
         String ping = "PING: \2477" + ((mc.getCurrentServerData() != null) ? mc.getCurrentServerData().pingToServer : 0);
         String coord = "XYZ: \2477" + MathHelper.floor(this.mc.player.posX) + " / " + MathHelper.floor(this.mc.player.posY) + " / " + MathHelper.floor(this.mc.player.posZ);String
                 build = "Build: \2477" + Satellite.VERSION;
-        name = name.substring(0, 1).replaceAll(name.substring(0, 1), "\247c" + name.substring(0, 1)) + name.substring(1).replaceAll(name.substring(1), "\247f" + name.substring(1));
+      //  name = name.substring(0, 1).replaceAll(name.substring(0, 1), "\247c" + name.substring(0, 1)) + name.substring(1).replaceAll(name.substring(1), "\247f" + name.substring(1));
+        name = name.substring(0, 1).replaceAll(name.substring(0, 1),  name.substring(0, 1)) + name.substring(1).replaceAll(name.substring(1), "\247f" + name.substring(1));
+
         if (!mc.gameSettings.showDebugInfo) {
-            font2.drawStringWithShadow(name, 3, 4, new Color(255, 50, 50).getRGB());
+            font2.drawStringWithShadow(name, 3, 4, color);
             if (mc.currentScreen instanceof GuiChat) {
                 height += 14;
             }
@@ -96,13 +114,13 @@ public class HUD2 {
                 int color = -1;
                 switch (colormode.getMode()) {
                     case "Default":
-                        color = new Color(255, 50, 50).getRGB();
+                        color = new Color(50   , 50, 255).getRGB();
                         break;
                     case "Rainbow":
                         color = Colors.rainbow((counter[0] * 15) * 7, 0.8f, 1.0f);
                         break;
                     case "Pulsing":
-                        color = TwoColoreffect(new Color(255, 50, 50), new Color(79, 9, 9), Math.abs(System.currentTimeMillis() / 10L) / 100.0 + 3.0F * (counter[0] * 2.55) / 60).getRGB();
+                        color = TwoColoreffect(new Color(50, 50, 255), new Color(9, 9, 79), Math.abs(System.currentTimeMillis() / 10L) / 100.0 + 3.0F * (counter[0] * 2.55) / 60).getRGB();
                         break;
                     case "Test":
                         color = TwoColoreffect(new Color(65, 179, 255), new Color(248, 54, 255), Math.abs(System.currentTimeMillis() / 10L) / 100.0 + 3.0F * (counter[0] * 2.55) / 60).getRGB();

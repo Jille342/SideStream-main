@@ -32,7 +32,10 @@ public class BetterFightSound extends Module {
                         event.setCancelled(true);
                     if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE)
                         event.setCancelled(true);
-
+                    if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_CRIT)
+                        event.setCancelled(true);
+                    if(  ((SPacketSoundEffect) p).getSound() == SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK)
+                        event.setCancelled(true);
                 }
                 //      if(p instanceof SPacketExplosion) {
                 //        event.setCancelled(true);

@@ -1,5 +1,6 @@
 package com.github.satellite.features.module;
 
+import com.github.satellite.Satellite;
 import com.github.satellite.event.Event;
 import com.github.satellite.features.module.combat.*;
 import com.github.satellite.features.module.misc.*;
@@ -34,7 +35,6 @@ public class ModuleManager {
 		modules.add(new Fullbright());
 		modules.add(new InvMove());
 		modules.add(new Tracers());
-		modules.add(new NoFall());
 		modules.add(new AntiHunger());
 		modules.add(new FreeCam());
 		modules.add(new StorageESP());
@@ -54,7 +54,6 @@ public class ModuleManager {
         modules.add(new HUD());
 		modules.add(new FreeLook());
 		modules.add(new Notification());
-		modules.add(new HoleTP());
 		modules.add(new ChatSuffix());
 		modules.add(new HoleESP());
 		modules.add(new AutoTotem());
@@ -71,6 +70,14 @@ public class ModuleManager {
 		modules.add(new BowAimbot());
 		modules.add(new NameTags());
 		modules.add(new NameProtect());
+		modules.add(new AntiForgeBypass());
+		modules.add(new WTap());
+		modules.add(new AutoTool());
+		modules.add(new AutoSword());
+		modules.add(new ESP2());
+		modules.add(new NameTags2());
+		modules.add(new ESP3());
+		modules.add(new ToggleSneak());
 	}
 
 	public static class ModuleComparator implements Comparator<Module> {
@@ -115,8 +122,8 @@ public class ModuleManager {
 	}
 
 	public static void saveModuleSetting() {
-		File directory = new File(Minecraft.getMinecraft().gameDir, "satellite");
-		File setting = new File(directory, "setting");
+		File directory = new File(Minecraft.getMinecraft().gameDir, Satellite.NAME);
+		File setting = new File(directory, "Settings");
 
 		if(!directory.exists()){
 			directory.mkdir();
@@ -164,8 +171,8 @@ public class ModuleManager {
 	}
 
 	public static void loadModuleSetting() {
-		File directory = new File(Minecraft.getMinecraft().gameDir, "satellite");
-		File setting = new File(directory, "setting");
+		File directory = new File(Minecraft.getMinecraft().gameDir, Satellite.NAME);
+		File setting = new File(directory, "Settings");
 
 		if (setting.isDirectory()){
 			for (Module m : modules) {

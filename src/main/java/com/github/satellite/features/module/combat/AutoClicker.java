@@ -61,7 +61,7 @@ public class AutoClicker extends Module {
         this.rightClickSetting = new BooleanSetting("RightClick", true);
 
 
-        addSetting(leftClickSetting, ignoreTeamsSetting, rightClickSetting, rightCpsSetting, leftClickSetting, leftCpsSetting, ignoreTeamsSetting);
+        addSetting(leftClickSetting, ignoreTeamsSetting, rightClickSetting, rightCpsSetting, leftClickSetting, leftCpsSetting);
     }
 
     @Override

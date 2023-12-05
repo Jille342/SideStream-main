@@ -13,16 +13,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiIngame.class)
 public class MixinGuiIngame {
 
-    @Inject(method = "renderHotbar", at = @At("RETURN"))
+    @Inject(method = "renderHotbar", at = @At("HEAD"))
     private void renderHotbar(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
+        final EventRender2D eventRender2D = new EventRender2D(partialTicks);
+        Satellite.onEvent(eventRender2D);
         if(ModuleManager.getModulebyName("HUD").enable)
         Satellite.hud.draw();
         if(ModuleManager.getModulebyName("HUD2").enable)
             Satellite.hud2.draw();
+
     }
-    @Inject(method =  "renderGameOverlay", at = @At("RETURN"))
-    public void renderGameOverlay(float partialTicks, CallbackInfo ci) {
-        final EventRender2D eventRender2D = new EventRender2D( partialTicks);
-        Satellite.onEvent(eventRender2D);
-    }
+
 }

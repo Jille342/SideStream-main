@@ -13,7 +13,7 @@ import org.lwjgl.input.Keyboard;
 
 public class FreeCam extends Module {
 	public FreeCam() {
-		super("FreeCam", Keyboard.KEY_U, Category.RENDER);
+		super("FreeCam", 0, Category.RENDER);
 	}
 
 	EntityOtherPlayerMP renderViewEntity;

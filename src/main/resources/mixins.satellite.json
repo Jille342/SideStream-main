@@ -4,16 +4,16 @@
   "package": "com.github.satellite.mixin.client",
   "refmap": "mixins.satellite.refmap.json",
   "mixins": [
+    "AccessorCPacketChatMessage",
+    "AccessorCPacketUseEntity",
     "AccessorEntity",
     "AccessorEntityPlayer",
     "AccessorEntityPlayerSP",
     "AccessorEntityRenderer",
-    "AccessorMinecraft",
     "AccessorMapData",
-    "AccessorTimer",
+    "AccessorMinecraft",
     "AccessorNetHandlerPlayClient",
-    "AccessorCPacketChatMessage",
-    "AccessorCPacketUseEntity",
+    "AccessorTimer",
     "MixinEntity",
     "MixinEntityLivingBase",
     "MixinEntityPlayerSP",
@@ -25,5 +25,8 @@
     "MixinNetHandlerPlayClient",
     "MixinNetworkManager",
     "MixinRenderLivingBase"
+  ],
+  "client": [
+    "MixinGuiMultiplayer"
   ]
 }

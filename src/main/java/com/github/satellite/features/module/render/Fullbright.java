@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 
 public class Fullbright extends Module {
 	public Fullbright() {
-		super("Fullbright", Keyboard.KEY_K,	Category.RENDER);
+		super("Fullbright", 0,	Category.RENDER);
 	}
 
 	float lastGamma;
