@@ -393,7 +393,7 @@ public class ESP2 extends Module {
     }
     private void collectEntities() {
         this.collectedEntities.clear();
-        List<Entity> playerEntities = mc.world.loadedEntityList;
+        List<EntityPlayer> playerEntities = mc.world.playerEntities;
         for (int i = 0, playerEntitiesSize = playerEntities.size(); i < playerEntitiesSize; i++) {
             Entity entity = playerEntities.get(i);
             if (isValid(entity))
