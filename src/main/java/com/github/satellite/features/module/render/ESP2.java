@@ -325,8 +325,7 @@ public class ESP2 extends Module {
 
             switch (currentmode) {
                 case "Box":
-                    for (Object obj : mc.world.loadedEntityList) {
-                        Entity entity = (Entity) obj;
+                    for (EntityPlayer entity : mc.world.playerEntities) {
                         if (isValid(entity)) {
                             double x = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * mc.getRenderPartialTicks() - mc.getRenderManager().viewerPosX;
                             double y = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * mc.getRenderPartialTicks() - mc.getRenderManager().viewerPosY;
@@ -340,10 +339,10 @@ public class ESP2 extends Module {
                                     this.color = Colors.rainbow(1400, 1.0F, 1.0F);
                                     break;
                                 case "Team":
-                                   // this.color = ServerHelper.isTeammate((EntityPlayer) entity) ? Colors.getColor(255, 60, 60) : Colors.getColor(60, 255, 60);
+                          //      this.color = ServerHelper.isTeammate((EntityPlayer) entity) ? Colors.getColor(255, 60, 60) : Colors.getColor(60, 255, 60);
                                     break;
                                 case "Shotbow":
-                                   this.color = Colors.getTeamColor(entity);
+                                   this.color = ServerHelper.getTeamColor(entity).getRGB();
                                     break;
                             }
 
