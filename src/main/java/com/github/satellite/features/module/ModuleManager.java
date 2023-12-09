@@ -15,6 +15,7 @@ import com.github.satellite.setting.ModeSetting;
 import com.github.satellite.setting.NumberSetting;
 
 import net.minecraft.client.Minecraft;
+import wtf.mania.module.impl.misc.AdminChecker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,6 +79,7 @@ public class ModuleManager {
 		modules.add(new NameTags2());
 		modules.add(new ESP3());
 		modules.add(new ToggleSneak());
+		modules.add(new AdminChecker());
 	}
 
 	public static class ModuleComparator implements Comparator<Module> {

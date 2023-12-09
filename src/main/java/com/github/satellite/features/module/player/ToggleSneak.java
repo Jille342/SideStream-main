@@ -16,19 +16,12 @@ public class ToggleSneak extends Module {
         super("ToggleSneak", 0, Category.PLAYER);
     }
 
-    KeyBindSetting MouseMoveKey;
 
-
-
-    int lastMouseX = Mouse.getX();
-    int lastMouseY = Mouse.getY();
 
     @Override
     public void onEvent(Event<?> e) {
-        if(e instanceof EventUpdate) {
-            if(mc.currentScreen!=null) {
+        if(e.isPre()) {
                 KeyBinding.setKeyBindState(mc.gameSettings.keyBindSneak.getKeyCode(), true);
-            }
         }
         super.onEvent(e);
     }
