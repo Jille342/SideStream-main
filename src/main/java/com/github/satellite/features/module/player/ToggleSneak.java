@@ -22,8 +22,8 @@ public class ToggleSneak extends Module {
     @Override
     public void onEvent(Event<?> e) {
         if (e instanceof EventUpdate) {
-            mc.player.setSneaking(true);
 
+            mc.player.setSneaking(true);
             super.onEvent(e);
         }
     }
