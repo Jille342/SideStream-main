@@ -36,11 +36,6 @@ public class Fonts implements MCUtil {
     public static CFontRenderer simpleton16 = new CFontRenderer(getFontTTF("consolas", 16), true, true);
     public static CFontRenderer simpleton17 = new CFontRenderer(getFontTTF("consolas", 16), true, true);
 
-    public static CFontRenderer ICON = new CFontRenderer(getFontTTF("Ex", 21), true, true);
-    public static CFontRenderer BIG_ICON = new CFontRenderer(getFontTTF("Ex", 45), true, true);
-    public static CFontRenderer NOTIFICATION = new CFontRenderer(getFontTTF("ExNoti", 45), true, true);
-    public static CFontRenderer ARROW_ICON = new CFontRenderer(getFontTTF("ExArrow", 15), true, true);
-
     private static Font getFontTTF(String name, int size) {
         Font font;
         try {

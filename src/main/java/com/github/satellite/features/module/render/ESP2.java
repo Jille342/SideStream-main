@@ -1,5 +1,6 @@
 package com.github.satellite.features.module.render;
 
+import com.github.satellite.Satellite;
 import com.github.satellite.event.Event;
 import com.github.satellite.event.listeners.*;
 import com.github.satellite.features.module.Module;
@@ -33,6 +34,8 @@ import org.lwjgl.util.glu.GLU;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector4d;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -84,7 +87,7 @@ public class ESP2 extends Module {
     }
 
     public void onEvent(Event<?> e) {
-        if (e instanceof EventRender2D) {
+        if (e instanceof EventRenderGUI) {
           ScaledResolution scaledResolution = new ScaledResolution(mc);
             switch (mode.getMode()) {
                 case "2D": {
@@ -118,7 +121,9 @@ public class ESP2 extends Module {
                             double height = entity.height + ((entity.isSneaking() ) ? -0.3D : 0.2D);
                             AxisAlignedBB aabb = new AxisAlignedBB(x - width, y, z - width, x + width, y + height, z + width);
                             Vector3d[] vectors = new Vector3d[]{new Vector3d(aabb.minX, aabb.minY, aabb.minZ), new Vector3d(aabb.minX, aabb.maxY, aabb.minZ), new Vector3d(aabb.maxX, aabb.minY, aabb.minZ), new Vector3d(aabb.maxX, aabb.maxY, aabb.minZ), new Vector3d(aabb.minX, aabb.minY, aabb.maxZ), new Vector3d(aabb.minX, aabb.maxY, aabb.maxZ), new Vector3d(aabb.maxX, aabb.minY, aabb.maxZ), new Vector3d(aabb.maxX, aabb.maxY, aabb.maxZ)};
-                            entityRenderer.updateRenderer();
+                           EventCameraTransform eventCameraTransform = new EventCameraTransform();
+                            Satellite.onEvent(eventCameraTransform);
+
                             Vector4d position = null;
                             for (Vector3d vector : vectors) {
                                 vector = project2D(scaleFactor, vector.x - renderMng.viewerPosX, vector.y - renderMng.viewerPosY, vector.z - renderMng.viewerPosZ);
@@ -225,7 +230,7 @@ public class ESP2 extends Module {
                                      //       texcolor = ServerHelper.isTeammate((EntityPlayer) entity) ? Colors.getColor(255, 60, 60) : Colors.getColor(60, 255, 60);
                                             break;
                                         case "Shotbow":
-                                            texcolor = Colors.getTeamColor(entity);
+                                            texcolor = Colors.getTeamColor((EntityPlayer) entity);
                                             break;
                                     }
 
@@ -342,7 +347,7 @@ public class ESP2 extends Module {
                           //      this.color = ServerHelper.isTeammate((EntityPlayer) entity) ? Colors.getColor(255, 60, 60) : Colors.getColor(60, 255, 60);
                                     break;
                                 case "Shotbow":
-                                   this.color = ServerHelper.getTeamColor(entity).getRGB();
+                                   this.color = Colors.getTeamColor(entity);
                                     break;
                             }
 

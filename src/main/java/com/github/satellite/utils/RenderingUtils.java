@@ -156,9 +156,9 @@ public class RenderingUtils implements MCUtil {
                 break;
         }
     //    GlStateManager.pushMatrix();
-        GlStateManager.translate(x - mc.getRenderManager().viewerPosX, y + offset - mc.getRenderManager().viewerPosY, z - mc.getRenderManager().viewerPosZ);
-        GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0, 1, 0);
-        GlStateManager.rotate(mc.getRenderManager().playerViewX, mc.gameSettings.thirdPersonView == 2 ? -1 : 1, 0, 0);
+        GL11.glTranslated(x - mc.getRenderManager().viewerPosX, y + offset - mc.getRenderManager().viewerPosY, z - mc.getRenderManager().viewerPosZ);
+        GL11.glRotatef(-mc.getRenderManager().playerViewY, 0, 1, 0);
+        GL11.glRotatef(mc.getRenderManager().playerViewX, mc.gameSettings.thirdPersonView == 2 ? -1 : 1, 0, 0);
         GlStateManager.scale(-scale, -scale, scale);
         if (type == 2) {
             double width = 0;
@@ -166,7 +166,7 @@ public class RenderingUtils implements MCUtil {
 
 
             for (int i = 0; i < text.length; i++) {
-                double w = font.getStringWidth( text[i]) / 2;
+                double w = (double) font.getStringWidth(text[i]) / 2;
                 if (w > width) {
                     width = w;
                 }

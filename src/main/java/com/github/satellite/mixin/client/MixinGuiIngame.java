@@ -2,6 +2,7 @@ package com.github.satellite.mixin.client;
 
 import com.github.satellite.Satellite;
 import com.github.satellite.event.listeners.EventRender2D;
+import com.github.satellite.event.listeners.EventRenderGUI;
 import com.github.satellite.features.module.ModuleManager;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
@@ -24,4 +25,9 @@ public class MixinGuiIngame {
 
     }
 
+    @Inject( method= "renderGameOverlay", at = @At("HEAD") )
+    private void renderGameOverlay(float partialTicks, CallbackInfo ci) {
+     final EventRenderGUI eventRenderGUI = new EventRenderGUI();
+     Satellite.onEvent(eventRenderGUI);
+    }
 }

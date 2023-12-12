@@ -6,10 +6,15 @@ import com.github.satellite.event.listeners.EventRenderGUI;
 import com.github.satellite.event.listeners.EventRenderWorld;
 import com.github.satellite.features.module.Module;
 import com.github.satellite.setting.BooleanSetting;
+import com.github.satellite.utils.RenderingUtils;
 import com.github.satellite.utils.font.CFontRenderer;
 import com.github.satellite.utils.font.Fonts;
 import com.github.satellite.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -27,13 +32,15 @@ import java.util.Calendar;
 public class NameTags2 extends Module {
     private final CFontRenderer font = Fonts.default18;
     BooleanSetting renderSelf;
+    BooleanSetting showItems;
     public NameTags2() {
         super("NameTags2", 0, Category.RENDER);
     }
 
     public void init() {
         renderSelf = new BooleanSetting("Render Self", false);
-        addSetting(renderSelf);
+        showItems = new BooleanSetting("Show Items", true);
+        addSetting(renderSelf, showItems);
         super.init();
     }
 
@@ -52,32 +59,72 @@ public class NameTags2 extends Module {
                 double z = ((player.lastTickPosZ + (player.posZ - player.lastTickPosZ)
                         - mc.getRenderManager().viewerPosZ));
                 renderTag(player, x, y, z);
+
             }
         }
     }
+    private int findArmorY(int posY) {
+        int posY2 = showItems.enable ? -26 : -27;
+        if (posY > 4) {
+            posY2 -= (posY - 4) * 8;
+        }
+
+        return posY2;
+    }
+
+
+
+    private void renderEnchants(ItemStack itemStack, int posX, int posY) {
+        GlStateManager.enableTexture2D();
+
+        for (Enchantment enchantment : EnchantmentHelper.getEnchantments(itemStack).keySet()) {
+            if (enchantment == null) {
+                continue;
+            }
+
+            posY += 8;
+        }
+
+
+        GlStateManager.disableTexture2D();
+    }
     private void renderTag(Entity entity, double x, double y, double z) {
-        String name = entity.getName();
+        double dist = mc.player.getDistance(x, y, z);
+        double scale = 1;
+        String name = entity.getDisplayName().getFormattedText();
+        name = name.replace(entity.getDisplayName().getFormattedText(), "\247f" + entity.getDisplayName().getFormattedText());
+
         if(entity.isSneaking() || entity.isInvisible()) {
             name = "\2479" + name;
         }
         if (entity instanceof EntityLivingBase) {
             name = name + " \247a" + ((double)Math.round((((EntityLivingBase) entity).getHealth() * 100) / 100) / 2);
         }
+        scale = 0.0018 + 0.0001 * dist;
+        if (dist <= 8.0) scale = 0.000245;
 
         float var13 = 1.6F;
-        float var14 = (float) (0.016666668F * (mc.player.getDistanceSq(entity)) / 2);
-        GL11.glPushMatrix();
+
+        GlStateManager.pushMatrix();
+    //    GlStateManager.translate(x, y, z);
+        GlStateManager.disableDepth();
+        GlStateManager.enableBlend();
+        GlStateManager.disableLighting();
+        GlStateManager.disableTexture2D();
+
+
         GL11.glTranslatef((float) x, (float) y + entity.height + 0.5F, (float) z);
         GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+        GlStateManager.disableBlend();
         GL11.glRotatef(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
-        GL11.glScalef(-var14, -var14, var14);
+       GlStateManager.scale(-scale,  -scale, scale);
         GL11.glDepthMask(false);
         GL11.glDisable(GL11.GL_LIGHTING);
         Tessellator var15 = Tessellator.getInstance();
         int var16 = (int) -mc.player.getDistanceSq(entity) / (int) var13;
         if (entity.isSneaking()) {
-            var16 += 4;
+       //     var16 += 4;
         } else if (var16 < -14) {
             var16 = -14;
         }
@@ -97,7 +144,12 @@ public class NameTags2 extends Module {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(true);
 
-        GL11.glPopMatrix();
+        GlStateManager.enableDepth();
+        GlStateManager.depthMask(true);
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
     }
 
 

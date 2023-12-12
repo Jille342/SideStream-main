@@ -27,6 +27,7 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -64,7 +65,7 @@ public final class BowAimbot extends Module
         addSetting( ignoreTeamsSetting,targetAnimalsSetting, targetMonstersSetting, fov);
     }
 
-    public void onEvent(Event<?> e) {
+    public void onEvent(Event<?> e) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         if (e instanceof EventUpdate) {
             // check if using item
             if (!mc.gameSettings.keyBindUseItem.isKeyDown()) {

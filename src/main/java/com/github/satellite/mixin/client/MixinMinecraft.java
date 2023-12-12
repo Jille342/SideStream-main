@@ -2,6 +2,8 @@ package com.github.satellite.mixin.client;
 
 import com.github.satellite.features.module.ModuleManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.main.GameConfiguration;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
@@ -13,11 +15,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
+    @Shadow
+    public GuiScreen currentScreen;
+
 
     @Inject(method = {"shutdown"}, at = @At("HEAD"))
     public void shutdown(CallbackInfo ci)
     {
         ModuleManager.saveModuleSetting();
     }
+
+
 
 }

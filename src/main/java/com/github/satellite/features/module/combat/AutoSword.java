@@ -19,7 +19,7 @@ public class AutoSword extends Module {
 
         if (e instanceof EventPacket) {
             EventPacket event = ((EventPacket)e);
-            if(event.isOutgoing()) {
+            if(event.isIncoming()) {
                 if (event.getPacket() instanceof CPacketUseEntity) {
                     CPacketUseEntity packetUseEntity = (CPacketUseEntity) event.getPacket();
                     if (packetUseEntity.getAction() == CPacketUseEntity.Action.ATTACK ) {

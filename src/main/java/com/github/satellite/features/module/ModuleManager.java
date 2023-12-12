@@ -43,26 +43,20 @@ public class ModuleManager {
 		modules.add(new AutoBuild());
 		modules.add(new PacketCanceller());
 		modules.add(new Map());
-		modules.add(new EntityFly());
-		modules.add(new AutoSkull());
-		modules.add(new HoleKicker());
 		modules.add(new ESP());
 		modules.add(new AntiChunkBan());
 		modules.add(new Debug());
 		modules.add(new Ground());
 		modules.add(new Test());
-		modules.add(new ElytraFly());
         modules.add(new HUD());
 		modules.add(new FreeLook());
 		modules.add(new Notification());
-		modules.add(new ChatSuffix());
 		modules.add(new HoleESP());
 		modules.add(new AutoTotem());
 		modules.add(new FakePlayer());;
 		modules.add(new Burrow());
 		modules.add(new Anchor());
 		modules.add(new ForcePlace());
-		modules.add(new Nuker());
 		modules.add(new AutoClicker());
 		modules.add(new Sprint());
 		modules.add(new AimAssist());
@@ -77,7 +71,6 @@ public class ModuleManager {
 		modules.add(new AutoSword());
 		modules.add(new ESP2());
 		modules.add(new NameTags2());
-		modules.add(new ESP3());
 		modules.add(new ToggleSneak());
 		modules.add(new AdminChecker());
 	}

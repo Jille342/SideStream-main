@@ -7,6 +7,7 @@ import com.github.satellite.setting.Setting;
 import com.github.satellite.utils.Translate;
 import net.minecraft.client.Minecraft;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -121,7 +122,6 @@ public class Module {
 	public void onEnable() {}
 	public void onDisable() {}
 	public void onEvent(Event<?> e) {}
-	
 	public enum Category {
 		COMBAT("Combat"),
 		MOVEMENT("Movement"),

@@ -4,6 +4,7 @@ import com.github.satellite.utils.MCUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.awt.Color;
 import java.text.NumberFormat;
@@ -138,7 +139,7 @@ public class Colors implements MCUtil {
         return range;
     }
 
-    public static int getTeamColor(Entity entityIn) {
+    public static int getTeamColor(EntityPlayer entityIn) {
         int i = -1;
             if (entityIn.getDisplayName().getUnformattedText().equalsIgnoreCase("§f[§cR§f]§c" + entityIn.getName())) {
                 i = Colors.getColor(new Color(255, 60, 60));
@@ -154,7 +155,6 @@ public class Colors implements MCUtil {
 
         return i;
     }
-
     public static Color rainbow(long time, float count, float fade) {
         float hue = ((float) time + (1.0F + count) * 2.0E8F) / 1.0E10F % 1.0F;
         long color = Long.parseLong(Integer.toHexString(Integer.valueOf(Color.HSBtoRGB(hue, 1.0F, 1.0F)).intValue()), 16);

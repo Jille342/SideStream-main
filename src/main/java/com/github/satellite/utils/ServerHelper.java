@@ -39,6 +39,16 @@ public class ServerHelper {
         }
         return color;
     }
+    public static int getTeamColor(EntityPlayer player) {
+        int color = 16777215;
+        ScorePlayerTeam scoreplayerteam = (ScorePlayerTeam)player.getTeam();
+        if (scoreplayerteam != null) {
+            String s = FontRenderer.getFormatFromString(scoreplayerteam.getPrefix());
+            if (s.length() >= 2)
+                color = Minecraft.getMinecraft().fontRenderer.getColorCode(s.charAt(1));
+        }
+        return color;
+    }
 
     public static String getName(UUID uuid) {
         if (nameCache.containsKey(uuid))

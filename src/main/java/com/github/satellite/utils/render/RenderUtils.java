@@ -5,11 +5,13 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -65,6 +67,108 @@ public final class RenderUtils {
 		quickDrawRect(4.0F, -20.3F, 7.3F, -20.0F);
 		quickDrawRect(-7.3F, -20.3F, -4.0F, -20.0F);
 		GL11.glEndList();
+	}
+
+
+	public static void playerESP2DBox(EntityPlayer e, int color) {
+		pre3D();
+		float pT = mc.getRenderPartialTicks();
+		float x = (float)(e.lastTickPosX + (e.posX - e.lastTickPosX) * pT - mc.getRenderManager().viewerPosX);
+		float y = (float)(e.lastTickPosY + (e.posY - e.lastTickPosY) * pT - mc.getRenderManager().viewerPosY + 1.2D);
+		float z = (float)(e.lastTickPosZ + (e.posZ - e.lastTickPosZ) * pT - mc.getRenderManager().viewerPosZ);
+		float s = Math.min(Math.max(1.2F * mc.player.getDistance((Entity)e) * 0.15F, 1.25F), 6.0F) * 0.02F;
+		GlStateManager.translate(x, y + e.height + 0.5F - e.height / 2.0F, z);
+		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(-(mc.getRenderManager()).playerViewY, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate((mc.getRenderManager()).playerViewX, 1.0F, 0.0F, 0.0F);
+		GL11.glScalef(-s, -s, s);
+		GL11.glEnable(3553);
+		post3D();
+	}
+	public static void playerESPFill(EntityPlayer entity, int color) {
+		float x = (float)(entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * mc.getRenderPartialTicks() - mc.getRenderManager().viewerPosX);
+		float y = (float)(entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * mc.getRenderPartialTicks() -  mc.getRenderManager().viewerPosY);
+		float z = (float)(entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * mc.getRenderPartialTicks() -  mc.getRenderManager().viewerPosZ);
+		float widthX = (float)((entity.getEntityBoundingBox().maxX - entity.getEntityBoundingBox().minX) / 2.0D + 0.05D);
+		float widthZ = (float)((entity.getEntityBoundingBox().maxZ - entity.getEntityBoundingBox().minZ) / 2.0D + 0.05D);
+		float height = (float)((entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) * 1.100000023841858D);
+		pre3D();
+		glColor((color == 16777215) ? -1 : color);
+		GL11.glLineWidth(1.0F);
+		GL11.glBegin(3);
+		GL11.glVertex3d((x - widthX), y, (z - widthZ));
+		GL11.glVertex3d((x - widthX), y, (z - widthZ));
+		GL11.glVertex3d((x - widthX), (y + height), (z - widthZ));
+		GL11.glVertex3d((x + widthX), (y + height), (z - widthZ));
+		GL11.glVertex3d((x + widthX), y, (z - widthZ));
+		GL11.glVertex3d((x - widthX), y, (z - widthZ));
+		GL11.glVertex3d((x - widthX), y, (z + widthZ));
+		GL11.glEnd();
+		GL11.glBegin(3);
+		GL11.glVertex3d((x + widthX), y, (z + widthZ));
+		GL11.glVertex3d((x + widthX), (y + height), (z + widthZ));
+		GL11.glVertex3d((x - widthX), (y + height), (z + widthZ));
+		GL11.glVertex3d((x - widthX), y, (z + widthZ));
+		GL11.glVertex3d((x + widthX), y, (z + widthZ));
+		GL11.glVertex3d((x + widthX), y, (z - widthZ));
+		GL11.glEnd();
+		GL11.glBegin(3);
+		GL11.glVertex3d((x + widthX), (y + height), (z + widthZ));
+		GL11.glVertex3d((x + widthX), (y + height), (z - widthZ));
+		GL11.glEnd();
+		GL11.glBegin(3);
+		GL11.glVertex3d((x - widthX), (y + height), (z + widthZ));
+		GL11.glVertex3d((x - widthX), (y + height), (z - widthZ));
+		GL11.glEnd();
+		post3D();
+	}
+
+	public static void pre3D() {
+		GL11.glPushMatrix();
+		GL11.glEnable(3042);
+		GL11.glBlendFunc(770, 771);
+		GL11.glShadeModel(7425);
+		GL11.glDisable(3553);
+		GL11.glEnable(2848);
+		GL11.glDisable(2929);
+		GL11.glDisable(2896);
+		GL11.glDepthMask(false);
+		GL11.glHint(3154, 4354);
+	}
+	public static void post3D() {
+		GL11.glDepthMask(true);
+		GL11.glEnable(2929);
+		GL11.glDisable(2848);
+		GL11.glEnable(3553);
+		GL11.glDisable(3042);
+		GL11.glPopMatrix();
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+	public static void playerESPBox(EntityPlayer entity, Color color) {
+		GL11.glBlendFunc(770, 771);
+		GL11.glEnable(3042);
+		GL11.glLineWidth(2.0F);
+		GL11.glDisable(3553);
+		GL11.glDisable(2929);
+		GL11.glDepthMask(false);
+		Minecraft.getMinecraft().getRenderManager();
+		Minecraft.getMinecraft()
+				.getRenderManager();
+		Minecraft.getMinecraft()
+				.getRenderManager();
+		Minecraft.getMinecraft()
+				.getRenderManager();
+		Minecraft.getMinecraft()
+				.getRenderManager();
+		Minecraft.getMinecraft()
+				.getRenderManager();
+		Minecraft.getMinecraft()
+				.getRenderManager();
+		RenderGlobal.renderFilledBox(new AxisAlignedBB(entity.getEntityBoundingBox().minX - 0.05D - entity.posX + entity.posX - mc.getRenderManager().viewerPosX, entity.getEntityBoundingBox().minY - entity.posY + entity.posY - mc.getRenderManager().viewerPosY, entity.getEntityBoundingBox().minZ - 0.05D - entity.posZ + entity.posZ - mc.getRenderManager().viewerPosZ, entity.getEntityBoundingBox().maxX + 0.05D - entity.posX + entity.posX - mc.getRenderManager().viewerPosX, entity.getEntityBoundingBox().maxY + 0.1D - entity.posY + entity.posY - mc.getRenderManager().viewerPosY, entity.getEntityBoundingBox().maxZ + 0.05D - entity.posZ + entity.posZ - mc.getRenderManager().viewerPosZ), (color.getRed() / 255), (color.getGreen() / 255), (color.getBlue() / 255), 0.5F);
+		GL11.glEnable(3553);
+		GL11.glEnable(2929);
+		GL11.glDepthMask(true);
+		GL11.glDisable(3042);
 	}
 
 	public static Vec3d renderEntityPos(Entity e) {

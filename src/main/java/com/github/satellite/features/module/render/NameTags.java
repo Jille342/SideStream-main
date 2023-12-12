@@ -91,7 +91,6 @@ public class NameTags extends Module {
 
         String[] name = new String[1];
         name[0] = buildEntityNameString(entityPlayer);
-       RenderingUtils.prepare();
         RenderingUtils.drawNametag(posX, adjustedY, posZ, name, findTextColor(entityPlayer), 2);
         renderItemsAndArmor(entityPlayer, 0, 0);
         GlStateManager.popMatrix();
