@@ -65,7 +65,7 @@ public final class BowAimbot extends Module
         addSetting( ignoreTeamsSetting,targetAnimalsSetting, targetMonstersSetting, fov);
     }
 
-    public void onEvent(Event<?> e) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    public void onEvent(Event<?> e) {
         if (e instanceof EventUpdate) {
             // check if using item
             if (!mc.gameSettings.keyBindUseItem.isKeyDown()) {
