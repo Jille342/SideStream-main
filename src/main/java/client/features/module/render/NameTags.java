@@ -39,8 +39,8 @@ public class NameTags extends Module {
         ench = new BooleanSetting("show Enchant", true);
         health = new BooleanSetting("Health", true);
         smartScaling= new BooleanSetting("Smart Scaling", true);
-        scaling = new NumberSetting("Size", 0.3F,0.1f, 1.0f, 0.1F);
-        factor = new NumberSetting("Factor", 0.5F,0.1f, 1.0f, 0.1F);
+        scaling = new NumberSetting("Size", 1.0F,1.0, 10, 1);
+        factor = new NumberSetting("Factor", 1.0F,1.0, 10, 1);
         addSetting(renderSelf, showItems, ench,smartScaling, health, scaling, factor);
         super.init();
     }

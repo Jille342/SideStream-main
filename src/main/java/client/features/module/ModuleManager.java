@@ -49,8 +49,6 @@ public class ModuleManager {
 		modules.add(new ESP());
 		modules.add(new AntiChunkBan());
 		modules.add(new Debug());
-		modules.add(new Ground());
-		modules.add(new Test());
         modules.add(new HUD());
 		modules.add(new FreeLook());
 		modules.add(new Notification());
@@ -77,6 +75,7 @@ public class ModuleManager {
 		modules.add(new Hitbox());
 		modules.add(new Reach());
 		modules.add(new AdminChecker());
+		modules.add(new SuccubusChecker());
 	}
 
 	public static class ModuleComparator implements Comparator<Module> {
