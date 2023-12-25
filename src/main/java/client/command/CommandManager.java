@@ -1,7 +1,6 @@
 package client.command;
 
 import client.command.impl.*;
-import com.github.satellite.command.impl.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

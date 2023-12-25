@@ -11,7 +11,6 @@ import client.ui.element.Panel;
 import client.ui.element.elements.OutlinePanel;
 import client.ui.element.elements.RectPanel;
 import client.ui.element.elements.TextPanel;
-import com.github.satellite.ui.element.elements.*;
 import client.ui.theme.ThemeManager;
 import client.utils.render.AnimationUtil.Mode;
 import client.utils.render.ColorUtils;

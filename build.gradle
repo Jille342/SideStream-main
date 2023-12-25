@@ -52,7 +52,7 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
-            property 'fml.coreMods.load', 'com.github.satellite.mixin.MixinLoaderForge'
+            property 'fml.coreMods.load', 'client.mixin.MixinLoaderForge'
             property 'mixin.env.disableRefMap', 'true'
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
@@ -96,7 +96,7 @@ dependencies {
 
 mixin {
     defaultObfuscationEnv 'searge'
-    add sourceSets.main, 'mixins.satellite.refmap.json'
+    add sourceSets.main, 'mixin.client.refmap.json'
 }
 
 processResources {
@@ -113,11 +113,11 @@ processResources {
 jar {
     manifest.attributes(
             'Manifest-Version': 1.0,
-            'MixinConfigs': 'mixins.satellite.json',
+            'MixinConfigs': 'mixin.client.json',
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
             'TweakOrder': 0,
             'FMLCorePluginContainsFMLMod': 'true',
-            'FMLCorePlugin': 'com.github.satellite.mixin.MixinLoaderForge',
+            'FMLCorePlugin': 'client.mixin.MixinLoaderForge',
             'ForceLoadAsMod': 'true'
     )
 

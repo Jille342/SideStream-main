@@ -1,0 +1,32 @@
+{
+  "verbose": false,
+  "compatibilityLevel": "JAVA_8",
+  "package": "client.mixin.client",
+  "refmap": "mixin.client.refmap.json",
+  "mixins": [
+    "AccessorCPacketChatMessage",
+    "AccessorCPacketUseEntity",
+    "AccessorEntity",
+    "AccessorEntityPlayer",
+    "AccessorEntityPlayerSP",
+    "AccessorEntityRenderer",
+    "AccessorMapData",
+    "AccessorMinecraft",
+    "AccessorNetHandlerPlayClient",
+    "AccessorTimer",
+    "MixinEntity",
+    "MixinEntityLivingBase",
+    "MixinEntityPlayerSP",
+    "MixinEntityRenderer",
+    "MixinGuiIngame",
+    "MixinGuiMainMenu",
+    "MixinMinecraft",
+    "MixinMovementInputFromOptions",
+    "MixinNetHandlerPlayClient",
+    "MixinNetworkManager",
+    "MixinRenderLivingBase"
+  ],
+  "client": [
+    "MixinGuiMultiplayer"
+  ]
+}

@@ -11,7 +11,7 @@ import java.util.Map;
 public class MixinLoaderForge implements IFMLLoadingPlugin {
     public MixinLoaderForge() {
         MixinBootstrap.init();
-        Mixins.addConfigurations("mixins.satellite.json");
+        Mixins.addConfigurations("mixin.client.json");
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext("searge");
     }
 

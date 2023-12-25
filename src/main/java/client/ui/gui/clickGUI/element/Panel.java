@@ -10,7 +10,6 @@ import client.utils.font.CFontRenderer;
 import client.utils.font.Fonts;
 import client.utils.render.ColorUtils;
 import client.utils.render.RenderUtils;
-import com.github.satellite.setting.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 

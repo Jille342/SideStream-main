@@ -17,12 +17,6 @@ import client.setting.ModeSetting;
 import client.setting.NumberSetting;
 import client.Client;
 import client.event.Event;
-import com.github.satellite.features.module.combat.*;
-import com.github.satellite.features.module.misc.*;
-import com.github.satellite.features.module.movement.*;
-import com.github.satellite.features.module.player.*;
-import com.github.satellite.features.module.render.*;
-import com.github.satellite.features.module.world.*;
 
 import net.minecraft.client.Minecraft;
 

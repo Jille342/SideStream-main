@@ -6,7 +6,6 @@ import client.event.listeners.EventCameraTransform;
 import client.event.listeners.EventNameTag;
 import client.event.listeners.EventRenderGUI;
 import client.event.listeners.EventRenderWorld;
-import com.github.satellite.event.listeners.*;
 import client.features.module.Module;
 import client.features.module.ModuleManager;
 import client.setting.BooleanSetting;

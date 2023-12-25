@@ -2,7 +2,6 @@ package client.ui.theme;
 
 import client.ui.theme.themes.*;
 import client.Client;
-import com.github.satellite.ui.theme.themes.*;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
