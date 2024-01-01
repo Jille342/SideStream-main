@@ -5,7 +5,6 @@ import client.features.module.ModuleManager;
 import client.Client;
 import client.event.EventDirection;
 import client.event.listeners.EventFlag;
-import client.features.module.combat.Hitbox;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.datasync.DataParameter;
@@ -71,12 +70,5 @@ public abstract class MixinEntity {
         }
     }
 
-    @Inject(method = "getCollisionBorderSize", at = @At("HEAD"), cancellable = true)
-    public void getCollisionBorderSize(CallbackInfoReturnable<Float> cir) {
-        Module hitBoxCheat = ModuleManager.getModulebyClass(Hitbox.class);
-        if (hitBoxCheat != null && !hitBoxCheat.isEnable()) {
-            cir.setReturnValue((float) Hitbox.size.getValue());
-        }
-    }
 
 }

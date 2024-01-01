@@ -105,6 +105,19 @@ public final class RotationUtils {
         return bb.calculateIntercept(eyesPos,
                 eyesPos.add(lookVec.scale(6))) != null;
     }
+
+    public static float calculateYawChangeToDst(Entity entity) {
+        double diffX = entity.posX - Minecraft.getMinecraft().player.posX;
+        double diffZ = entity.posZ - Minecraft.getMinecraft().player.posZ;
+        double deg = Math.toDegrees(Math.atan(diffZ / diffX));
+        if (diffZ < 0.0 && diffX < 0.0) {
+            return (float) MathHelper.wrapDegrees(-(Minecraft.getMinecraft().player.rotationYaw - (90 + deg)));
+        } else if (diffZ < 0.0 && diffX > 0.0) {
+            return (float) MathHelper.wrapDegrees(-(Minecraft.getMinecraft().player.rotationYaw - (-90 + deg)));
+        } else {
+            return (float) MathHelper.wrapDegrees(-(Minecraft.getMinecraft().player.rotationYaw - Math.toDegrees(-Math.atan(diffX / diffZ))));
+        }
+    }
     public static Rotation calcRotationFromCoords(BlockPos orig, BlockPos dest) {
         return calcRotationFromVec3d(new Vec3d(orig), new Vec3d(dest));
     }

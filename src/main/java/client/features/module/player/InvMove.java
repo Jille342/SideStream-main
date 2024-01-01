@@ -3,6 +3,7 @@ package client.features.module.player;
 
 import client.event.Event;
 import client.event.listeners.EventPlayerInput;
+import client.event.listeners.EventTick;
 import client.features.module.Module;
 import client.setting.KeyBindSetting;
 import org.lwjgl.input.Keyboard;
@@ -28,7 +29,7 @@ public class InvMove extends Module {
 
 	@Override
 	public void onEvent(Event<?> e) {
-		if(e instanceof EventPlayerInput) {
+		if(e instanceof EventTick) {
 			if(mc.currentScreen!=null) {
 				double speed=0;
 				if( MouseMoveKey.getKeyCode() != 0 && Keyboard.isKeyDown(MouseMoveKey.getKeyCode())) {
@@ -46,14 +47,6 @@ public class InvMove extends Module {
 				{
 					mc.player.setSprinting(false);
 				}
-				if(Keyboard.isKeyDown(Keyboard.KEY_UP))
-					mc.player.rotationPitch-=speed;
-				if(Keyboard.isKeyDown(Keyboard.KEY_DOWN))
-					mc.player.rotationPitch+=speed;
-				if(Keyboard.isKeyDown(Keyboard.KEY_LEFT))
-					mc.player.rotationYaw-=speed;
-				if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT))
-					mc.player.rotationYaw+=speed;
 
 				if(mc.player.rotationPitch>90)
 					mc.player.rotationPitch=90;

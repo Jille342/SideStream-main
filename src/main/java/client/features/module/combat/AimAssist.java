@@ -45,6 +45,7 @@ public class AimAssist extends Module {
     BooleanSetting targetAnimalsSetting;
     NumberSetting fov;
 
+    BooleanSetting targetInvisibles;
     public AimAssist() {
         super("Aim Assist",  Keyboard.KEY_NONE,Category.COMBAT);
     }
@@ -58,9 +59,9 @@ public class AimAssist extends Module {
         this.aimSpeedSetting = new NumberSetting("AimSpeed", 0.45, 0.1, 1.0, 0.1);
         this.rangeSetting = new NumberSetting("Range", 5.0, 3.0, 8.0, 0.1);
         this.fov = new NumberSetting("FOV", 90.0D, 15.0D, 360.0D, 1.0D);
+        this.targetInvisibles = new BooleanSetting("Target Invisibles", false);
 
-
-        addSetting(notHolding, ignoreTeamsSetting, aimSpeedSetting, rangeSetting,  targetAnimalsSetting, targetMonstersSetting, fov);
+        addSetting(notHolding, ignoreTeamsSetting, aimSpeedSetting, rangeSetting,  targetAnimalsSetting, targetMonstersSetting, fov,targetInvisibles);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class AimAssist extends Module {
             float diff = calculateYawChangeToDst(primary);
             float aimSpeed = (float) aimSpeedSetting.value;
             aimSpeed = (float) MathHelper.clamp(RandomUtils.nextFloat(aimSpeed - 0.2f, aimSpeed + 1.8f), aimSpeedSetting.minimum, aimSpeedSetting.maximum);
-            aimSpeed -= aimSpeed % getSensitivity();
+            aimSpeed -= (float) (aimSpeed % getSensitivity());
 
             if (diff < -6) {
                 aimSpeed -= diff / 12f;
@@ -143,6 +144,8 @@ public class AimAssist extends Module {
                     continue;
                 }
 
+                if (entity.isInvisible() && !targetInvisibles.enable)
+                    continue;
                 if (!PlayerHelper.fov(entity, fov.value))
                     continue;
                 double focusRange = mc.player.canEntityBeSeen(entity) ? rangeSetting.value : 3.5;

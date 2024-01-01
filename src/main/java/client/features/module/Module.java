@@ -15,7 +15,7 @@ public class Module {
 
 	private final Translate translate = new Translate(0.0F, 0.0F);
 
-	protected Minecraft mc = Minecraft.getMinecraft();
+	protected static Minecraft mc = Minecraft.getMinecraft();
 	
 	public Category category;
 	public KeyBindSetting keyBindSetting;

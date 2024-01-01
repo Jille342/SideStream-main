@@ -53,7 +53,6 @@ public class ModuleManager {
 		modules.add(new FreeLook());
 		modules.add(new Notification());
 		modules.add(new HoleESP());
-		modules.add(new AutoTotem());
 		modules.add(new FakePlayer());;
 		modules.add(new Burrow());
 		modules.add(new Anchor());
@@ -72,10 +71,12 @@ public class ModuleManager {
 		modules.add(new AutoSword());
 		modules.add(new ESP2());
 		modules.add(new ToggleSneak());
-		modules.add(new Hitbox());
-		modules.add(new Reach());
+		modules.add(new HitBox());
 		modules.add(new AdminChecker());
+		modules.add(new FastBreak());
 		modules.add(new SuccubusChecker());
+		modules.add(new HitDelayFix());
+		modules.add(new Reach2());
 	}
 
 	public static class ModuleComparator implements Comparator<Module> {

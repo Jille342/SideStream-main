@@ -16,6 +16,7 @@ import client.event.Event;
 import client.event.listeners.EventPacket;
 import client.event.listeners.EventRender2D;
 import client.event.listeners.EventUpdate;
+import client.utils.font.TTFFontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.network.play.client.CPacketTabComplete;
@@ -106,7 +107,7 @@ public class AdminChecker extends Module {
     public void displayAdmins() {
 
         if (timer2.hasReached(delay.value)) {
-            ChatUtils.printChat(String.valueOf("INC " + adminname + " " + admins.size()));
+            ChatUtils.printChat(String.valueOf("INC " + admins + " " + admins.size()));
             timer2.reset();
         }
     }
